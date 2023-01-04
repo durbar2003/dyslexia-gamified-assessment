@@ -183,10 +183,10 @@ from sklearn.neighbors import KNeighborsClassifier
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
 
-# In[67]:
+# In[159]:
 
 
-knn=KNeighborsClassifier(n_neighbors=6)
+knn=KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
 y2_pred=knn.predict(X_test)
 print("Accuracy:", metrics.accuracy_score(y_test, y2_pred))
@@ -485,7 +485,7 @@ cm_HybridEnsembler = confusion_matrix(y_test, y_pred)
 print(accuracy_score(y_test,y_pred)*100)
 
 
-# In[133]:
+# In[166]:
 
 
 estimators = []
@@ -503,15 +503,15 @@ model15 = LogisticRegression(penalty = 'l2', random_state = 0)
 estimators.append(('logistic5', model15))
 
 #Defining 5 K-NN classifiers
-model26 = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
+model26 = KNeighborsClassifier(n_neighbors = 5)
 estimators.append(('knn1', model26))
-model27 = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
+model27 = KNeighborsClassifier(n_neighbors = 5)
 estimators.append(('knn2', model27))
-model28 = KNeighborsClassifier(n_neighbors = 6, metric = 'minkowski', p = 2)
+model28 = KNeighborsClassifier(n_neighbors = 5)
 estimators.append(('knn3', model28))
-model29 = KNeighborsClassifier(n_neighbors = 4, metric = 'minkowski', p = 1)
+model29 = KNeighborsClassifier(n_neighbors = 5)
 estimators.append(('knn4', model29))
-model30 = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 1)
+model30 = KNeighborsClassifier(n_neighbors = 5)
 estimators.append(('knn5', model30))
 
 #Defining 5 Naive Bayes classifiers
@@ -590,6 +590,100 @@ model29 = KNeighborsClassifier(n_neighbors = 4, metric = 'minkowski', p = 1)
 estimators.append(('knn4', model29))
 model30 = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 1)
 estimators.append(('knn5', model30))
+
+#Defining 5 Naive Bayes classifiers
+model31 = GaussianNB()
+estimators.append(('nbs1', model31))
+model32 = GaussianNB()
+estimators.append(('nbs2', model32))
+model33 = GaussianNB()
+estimators.append(('nbs3', model33))
+model34 = GaussianNB()
+estimators.append(('nbs4', model34))
+model35 = GaussianNB()
+estimators.append(('nbs5', model35))
+
+#Defining 5 AdaBoost Classifiers
+model36 = AdaBoostClassifier()
+estimators.append(('ada1', model36))
+model37 = AdaBoostClassifier()
+estimators.append(('ada2', model37))
+model38 = AdaBoostClassifier()
+estimators.append(('ada3', model38))
+model39 = AdaBoostClassifier()
+estimators.append(('ada4', model39))
+model40 = AdaBoostClassifier()
+estimators.append(('ada5', model40))
+
+# Defining the ensemble model
+ensemble = VotingClassifier(estimators)
+ensemble.fit(X_train, y_train)
+y_pred = ensemble.predict(X_test)
+
+#Confision matrix
+cm_HybridEnsembler = confusion_matrix(y_test, y_pred)
+
+print(accuracy_score(y_test,y_pred)*100)
+
+
+# In[175]:
+
+
+estimators = []
+
+#Defining 5 Logistic Regression Models
+model11 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic1', model11))
+model12 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic2', model12))
+model13 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic3', model13))
+model14 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic4', model14))
+model15 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic5', model15))
+
+
+#Defining 5 Naive Bayes classifiers
+model31 = GaussianNB()
+estimators.append(('nbs1', model31))
+model32 = GaussianNB()
+estimators.append(('nbs2', model32))
+model33 = GaussianNB()
+estimators.append(('nbs3', model33))
+model34 = GaussianNB()
+estimators.append(('nbs4', model34))
+model35 = GaussianNB()
+estimators.append(('nbs5', model35))
+
+# Defining the ensemble model
+ensemble = VotingClassifier(estimators)
+ensemble.fit(X_train, y_train)
+y_pred = ensemble.predict(X_test)
+
+#Confision matrix
+cm_HybridEnsembler = confusion_matrix(y_test, y_pred)
+
+print(accuracy_score(y_test,y_pred)*100)
+
+
+# In[180]:
+
+
+estimators = []
+
+#Defining 5 Logistic Regression Models
+model11 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic1', model11))
+model12 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic2', model12))
+model13 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic3', model13))
+model14 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic4', model14))
+model15 = LogisticRegression(penalty = 'l2', random_state = 0)
+estimators.append(('logistic5', model15))
+
 
 #Defining 5 Naive Bayes classifiers
 model31 = GaussianNB()
